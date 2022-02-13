@@ -15,7 +15,7 @@ func RaceDetectorSupported(goos, goarch string) bool {
 		return goarch == "amd64" || goarch == "ppc64le" || goarch == "arm64"
 	case "darwin":
 		return goarch == "amd64" || goarch == "arm64"
-	case "freebsd", "netbsd", "openbsd", "windows":
+	case "freebsd", "haiku", "netbsd", "openbsd", "windows":
 		return goarch == "amd64"
 	default:
 		return false
@@ -50,7 +50,7 @@ func ASanSupported(goos, goarch string) bool {
 // ('go test -fuzz=.').
 func FuzzSupported(goos, goarch string) bool {
 	switch goos {
-	case "darwin", "freebsd", "linux", "windows":
+	case "darwin", "freebsd", "haiku", "linux", "windows":
 		return true
 	default:
 		return false
@@ -109,6 +109,7 @@ func BuildModeSupported(compiler, buildmode, goos, goarch string) bool {
 			"android/amd64", "android/arm", "android/arm64", "android/386",
 			"freebsd/amd64",
 			"darwin/amd64", "darwin/arm64",
+			"haiku/amd64",
 			"windows/amd64", "windows/386", "windows/arm64":
 			return true
 		}
@@ -126,6 +127,7 @@ func BuildModeSupported(compiler, buildmode, goos, goarch string) bool {
 			"android/amd64", "android/arm", "android/arm64", "android/386",
 			"freebsd/amd64",
 			"darwin/amd64", "darwin/arm64",
+			"haiku/amd64",
 			"ios/amd64", "ios/arm64",
 			"aix/ppc64",
 			"windows/386", "windows/amd64", "windows/arm":
@@ -135,7 +137,8 @@ func BuildModeSupported(compiler, buildmode, goos, goarch string) bool {
 
 	case "shared":
 		switch platform {
-		case "linux/386", "linux/amd64", "linux/arm", "linux/arm64", "linux/ppc64le", "linux/s390x":
+		case "linux/386", "linux/amd64", "linux/arm", "linux/arm64", "linux/ppc64le", "linux/s390x",
+			"haiku/amd64":
 			return true
 		}
 		return false
@@ -145,6 +148,7 @@ func BuildModeSupported(compiler, buildmode, goos, goarch string) bool {
 		case "linux/amd64", "linux/arm", "linux/arm64", "linux/386", "linux/s390x", "linux/ppc64le",
 			"android/amd64", "android/arm", "android/arm64", "android/386",
 			"darwin/amd64", "darwin/arm64",
+			"haiku/amd64",
 			"freebsd/amd64":
 			return true
 		}
@@ -158,6 +162,7 @@ func BuildModeSupported(compiler, buildmode, goos, goarch string) bool {
 func InternalLinkPIESupported(goos, goarch string) bool {
 	switch goos + "/" + goarch {
 	case "darwin/amd64", "darwin/arm64",
+		"haiku/amd64",
 		"linux/amd64", "linux/arm64", "linux/ppc64le",
 		"android/arm64",
 		"windows-amd64", "windows-386", "windows-arm":
