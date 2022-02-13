@@ -120,7 +120,7 @@ func printOSDetails(w io.Writer) {
 		printCmdOut(w, "uname -sr: ", "uname", "-sr")
 		printCmdOut(w, "", "lsb_release", "-a")
 		printGlibcVersion(w)
-	case "openbsd", "netbsd", "freebsd", "dragonfly":
+	case "openbsd", "netbsd", "freebsd", "dragonfly", "haiku":
 		printCmdOut(w, "uname -v: ", "uname", "-v")
 	case "illumos", "solaris":
 		// Be sure to use the OS-supplied uname, in "/usr/bin":

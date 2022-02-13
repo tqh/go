@@ -2072,6 +2072,7 @@ func TestBuildmodePIE(t *testing.T) {
 	case "linux/386", "linux/amd64", "linux/arm", "linux/arm64", "linux/ppc64le", "linux/riscv64", "linux/s390x",
 		"android/amd64", "android/arm", "android/arm64", "android/386",
 		"freebsd/amd64",
+		"haiku/amd64",
 		"windows/386", "windows/amd64", "windows/arm":
 	case "darwin/amd64":
 	default:
@@ -2129,7 +2130,7 @@ func testBuildmodePIE(t *testing.T, useCgo, setBuildmodeToPIE bool) {
 	tg.run(args...)
 
 	switch runtime.GOOS {
-	case "linux", "android", "freebsd":
+	case "linux", "android", "freebsd", "haiku":
 		f, err := elf.Open(obj)
 		if err != nil {
 			t.Fatal(err)
