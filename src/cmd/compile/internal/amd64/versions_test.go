@@ -28,7 +28,7 @@ func TestGoAMD64v1(t *testing.T) {
 	if runtime.GOARCH != "amd64" {
 		t.Skip("amd64-only test")
 	}
-	if runtime.GOOS != "linux" && runtime.GOOS != "darwin" {
+	if runtime.GOOS != "linux" && runtime.GOOS != "darwin" && runtime.GOOS != "haiku" {
 		t.Skip("test only works on elf or macho platforms")
 	}
 	if v := os.Getenv("GOAMD64"); v != "" && v != "v1" {
